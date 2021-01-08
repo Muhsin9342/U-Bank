@@ -1,5 +1,7 @@
 package com.upgrad.ubank;
 
+import com.upgrad.ubank.dtos.Account;
+import com.upgrad.ubank.dtos.Transaction;
 import com.upgrad.ubank.services.*;
 
 import java.util.Scanner;
@@ -134,7 +136,7 @@ public class Application {
         System.out.println("Get the account corresponding to Account No: " + loggedInAccountNo);
     }
 
-    private void deposit () {
+    private void deposit () {   // point 14
         if (!isLoggedIn) {
             System.out.println("You are not logged in.");
             return;
@@ -171,7 +173,7 @@ public class Application {
         }
     }
 
-    private void getAccountStatement() {
+    private void getAccountStatement() {   // point 15
         if (!isLoggedIn) {
             System.out.println("You are not logged in.");
             return;
@@ -200,8 +202,8 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        AccountService accountService = new AccountServiceImpl();
-        TransactionService transactionService = new TransactionServiceImplMobile();
+        TransactionService transactionService = new TransactionServiceImpl(); // point 3
+        AccountService accountService = new AccountServiceImpl(transactionService);// point 3
         Application application = new Application(accountService, transactionService);
         application.start();
     }
